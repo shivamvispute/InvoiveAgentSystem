@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: invoice-agent-system
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python main.py
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false        # you will paste this in the Render dashboard
+      - key: LLM_MODEL
+        value: llama-3.3-70b-versatile
+      - key: DATABASE_URL
+        value: sqlite+aiosqlite:///./invoice_agent.db
+      - key: USE_FAKE_REDIS
+        value: "true"
+      - key: API_RELOAD
+        value: "false"
+      - key: ANOMALY_SENSITIVITY
+        value: medium
+      - key: AUTO_APPROVE_THRESHOLD
+        value: "1000.0"
+      - key: ENABLE_TRACING
+        value: "false"
+      - key: DEMO_MODE
+        value: "true"
